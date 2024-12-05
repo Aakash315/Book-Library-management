@@ -21,3 +21,12 @@ if (isset($_POST['create'])) {
     header("Location: index.php");
     exit();
 }
+
+
+function yearValidation () {
+    if($_POST['publication_year'] <= 1900){
+        echo "valid year";
+    }else{
+        echo "invalid";
+    }
+}

@@ -1,22 +1,43 @@
 <?php
 include("partials/header.php");
+$heading = "Book Library";
 include("connection.php");
+
+$limit = 10;
+
+if (!isset($_GET['page'])) {
+    $page_number = 1;
+} else {
+    $page_number = $_GET['page'];
+}
+
+$start_page = ($page_number - 1) * $limit;
+// print_r($start_page);
+
+$sql = "SELECT * FROM books LIMIT $start_page, $limit";
+$stmt = $conn->query($sql);
+$stmt->execute();
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// print_r($result);
+
 
 $sql = "SELECT * FROM books";
 $stmt = $conn->query($sql);
 $stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-// print_r($result);
+$results = $stmt->rowCount();
+$result_count = ceil($results / $limit);
+// print_r($result_count);
 
 ?>
 
-<h1 class="mt-5">Add New Books</h1>
-<div>
+<h1 class="mt-5 px-5"><?= $heading; ?></h1>
+<div class="mt-3 px-5">
     <a href="create.php" class="btn btn-primary">Add Book</a>
 </div>
 <div class="container">
-    <table class="border table-bordered">
-        <thead class="">
+    <table class="table table-bordered mt-4">
+        <thead class="align-item-center">
             <th>ID</th>
             <th>Title</th>
             <th>Author</th>
@@ -26,7 +47,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <th>Created At</th>
             <th>Action</th>
         </thead>
-        <tbody>
+        <tbody class="">
             <?php foreach ($result as $book): ?>
                 <tr>
                     <td><?= $book["id"] ?></td>
@@ -38,14 +59,22 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?= $book["created_at"] ?></td>
                     <td>
                         <div>
-                            <a href="view.php?id=<?=$book['id'] ?>" class="btn btn-primary">View</a>
-                            <a href="edit.php?id=<?=$book['id'] ?>" class="btn btn-warning">Edit</a>
-                            <a href="delete.php?id=<?= $book['id'] ?>" class="btn btn-danger">Delete</a>
+                            <a href="view.php?id=<?= $book['id'] ?>" class="btn btn-info">View</a>
+                            <a href="edit.php?id=<?= $book['id'] ?>" class="btn btn-warning">Edit</a>
+            <a href="delete.php?id=<?= $book['id'] ?>" class="btn btn-danger" onclick="return .alert('Really Delete?')">Delete</a>
                         </div>
                     </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
+    <label for="" class="fs-6">pages..</label>
+    <?php
+    echo '<ul class="pagination">';
+    for ($i = 1; $i <= $result_count; $i++) {
+        echo '<a href="?page=' . $i . '" class="p-2 fs-5"> '. $i .' </a>';
+    }
+    echo '</ul>';
+    ?>
 </div>
 <?php include("partials/footer.php"); ?>
