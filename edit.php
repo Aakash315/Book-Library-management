@@ -14,7 +14,7 @@ $id = $_GET['id'];
     <a href="index.php" class="btn btn-primary">Back</a>
 </div>
 <div class="container border mt-4">
-    <form action="editview.php" method="post">
+    <form id="forms" action="editview.php" method="post">
         <div class="form-field my-4">
             <h4>Title :</h4>
             <input type="title" class="form-control" id="title" name="title" value="<?php echo $result['title']; ?>" placeholder="Title:">

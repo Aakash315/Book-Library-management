@@ -12,4 +12,4 @@ try {
 } catch (PDOException $e) {
     die("Connection failed: " . $e->getMessage());
 }
-print_r($conn);
+// print_r($conn);

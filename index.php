@@ -55,13 +55,13 @@ $result_count = ceil($results / $limit);
                     <td><?= $book["author"] ?></td>
                     <td><?= $book["publication_year"] ?></td>
                     <td><?= $book["isbn"] ?></td>
-                    <td><?= $book["available"] ?></td>
+                    <td><?= $book["available"]== 1 ? "YES" : "NO"; ?></td>
                     <td><?= $book["created_at"] ?></td>
                     <td>
                         <div>
                             <a href="view.php?id=<?= $book['id'] ?>" class="btn btn-info">View</a>
                             <a href="edit.php?id=<?= $book['id'] ?>" class="btn btn-warning">Edit</a>
-            <a href="delete.php?id=<?= $book['id'] ?>" class="btn btn-danger" onclick="return .alert('Really Delete?')">Delete</a>
+                            <a href="delete.php?id=<?= $book['id'] ?>" class="btn btn-danger">Delete</a>
                         </div>
                     </td>
                 </tr>
@@ -72,7 +72,7 @@ $result_count = ceil($results / $limit);
     <?php
     echo '<ul class="pagination">';
     for ($i = 1; $i <= $result_count; $i++) {
-        echo '<a href="?page=' . $i . '" class="p-2 fs-5"> '. $i .' </a>';
+        echo '<a href="?page=' . $i . '" class="p-2 fs-5"> ' . $i . ' </a>';
     }
     echo '</ul>';
     ?>

@@ -6,7 +6,7 @@ if (isset($_POST['create'])) {
     $author = $_POST['author'];
     $publication_year = $_POST['publication_year'];
     $isbn = $_POST['isbn'];
-    $available = $_POST['available'];
+    $available = isset($_POST['available'])==1 ? "Yes" : "No";
 
     $stmt = $conn->prepare("INSERT INTO books(title, author, publication_year, isbn, available) VALUES(:title, :author, :publication_year, :isbn, :available)");
 
@@ -22,11 +22,8 @@ if (isset($_POST['create'])) {
     exit();
 }
 
-
-function yearValidation () {
-    if($_POST['publication_year'] <= 1900){
-        echo "valid year";
-    }else{
-        echo "invalid";
-    }
-}
+// function checkBox () {
+//     if($_POST['available'] == 1){
+//         echo ;
+//     }
+// }
