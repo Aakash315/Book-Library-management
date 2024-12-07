@@ -18,7 +18,6 @@ $sql = "SELECT * FROM books LIMIT $start_page, $limit";
 $stmt = $conn->query($sql);
 $stmt->execute();
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 // print_r($result);
 
 
@@ -28,13 +27,23 @@ $stmt->execute();
 $results = $stmt->rowCount();
 $result_count = ceil($results / $limit);
 // print_r($result_count);
-
 ?>
 
 <h1 class="mt-5 px-5"><?= $heading; ?></h1>
 <div class="mt-3 px-5">
     <a href="create.php" class="btn btn-primary">Add Book</a>
 </div>
+<form action="index.php" method="post">
+    <div class="container mt-4">
+        <input type="search" name="search" id="search">
+        <input type="submit" class="btn btn-primary" value="Search">
+        <select name="available" id="available">
+            <option value="1" <?php isset($_GET['available']) && $_GET['available'] == 1 ? 'selected' : '' ?>>Yes</option>
+            <option value="0" <?php isset($_GET['available']) && $_GET['available'] == 0 ? 'selected': '' ?>>No</option>
+        </select>
+        <input type="submit" class="btn btn-primary" value="Search">
+    </div>
+</form>
 <div class="container">
     <table class="table table-bordered mt-4">
         <thead class="align-item-center">
@@ -55,7 +64,7 @@ $result_count = ceil($results / $limit);
                     <td><?= $book["author"] ?></td>
                     <td><?= $book["publication_year"] ?></td>
                     <td><?= $book["isbn"] ?></td>
-                    <td><?= $book["available"]== 1 ? "YES" : "NO"; ?></td>
+                    <td><?= $book["available"] == 1 ? "YES" : "NO"; ?></td>
                     <td><?= $book["created_at"] ?></td>
                     <td>
                         <div>

@@ -15,23 +15,19 @@ $result = $query->fetch();
         <form action=".php" method="post">
             <div class="form-field my-4">
                 <h3>Title:</h3>
-                <!-- <input type="title" class="form-control" id="title" name="title" placeholder="Title:"> -->
                  <p class=""><?php echo $result['title']; ?></p>
             </div>
             <div class="form-field my-4">
                 <h3>Author:</h3>
                 <p><?php echo $result['author']; ?></p>
-                <!-- <input type="author" class="form-control" id="author" name="author" placeholder="Author:"> -->
             </div>
             <div class="form-field my-4">
                 <h3>Publication Year:</h3>
                 <p><?php echo $result['publication_year']; ?></p>
-                <!-- <input type="publication_year" class="form-control" id="publication_year" name="publication_year" placeholder="Publication Year"> -->
             </div>
             <div class="form-field my-4">
                 <h3>Isbn:</h3>
                 <p><?php echo $result['isbn']; ?></p>
-                <!-- <input type="isbn" class="form-control" id="isbn" name="isbn" placeholder="ISBN"> -->
             </div>
         </form>
     </div>

@@ -40,7 +40,7 @@
                 if(!isbnValidation){
                     window.alert("Isbn must be reuired");
                     return false;
-                }if(charLength > isbnMax) {
+                }if(charLength > Max) {
                     window.alert("Isbn must be 13 digit");
                     return false;
                 }
